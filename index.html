@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chris Bonanni</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230C0C0C'/><text x='16' y='22' font-family='system-ui,sans-serif' font-size='16' font-weight='700' fill='%23C4916C' text-anchor='middle'>CB</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -11,17 +12,31 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg: #0C0C0C;
-            --surface: #1A2636;
-            --border: #2a3444;
-            --text: #e0e0e0;
-            --muted: #8a8a8a;
-            --accent: #7A4E32;
-            --accent-glow: rgba(122, 78, 50, 0.2);
-            --accent-secondary: #3A2942;
-            --warm: #4A3A2E;
+            /* M3 Dark Theme - Surface Tonal Hierarchy */
+            --bg: #0C0C0C;                          /* Surface Dim */
+            --surface: #141414;                      /* Surface */
+            --surface-container-low: #1A1A1A;        /* Surface Container Low */
+            --surface-container: #1E1E1E;            /* Surface Container */
+            --surface-container-high: #252525;       /* Surface Container High */
+            --surface-bright: #2C2C2C;               /* Surface Bright */
+
+            /* M3 Text Hierarchy - On Surface */
+            --text: #E6E1E5;                         /* On Surface (high emphasis) */
+            --text-secondary: #CAC4D0;               /* On Surface Variant */
+            --muted: #938F99;                        /* On Surface - low emphasis */
+
+            /* M3 Outline */
+            --border: rgba(255, 255, 255, 0.08);     /* Outline Variant */
+            --border-strong: rgba(255, 255, 255, 0.14); /* Outline */
+
+            /* 10% Accent - Primary */
+            --accent: #C4916C;                       /* Primary (warmer, lifted for dark bg) */
+            --accent-glow: rgba(196, 145, 108, 0.12);
+            --accent-container: rgba(196, 145, 108, 0.08); /* Primary Container */
+
+            /* Gradients */
             --gradient-1: #3A2942;
-            --gradient-2: #7A4E32;
+            --gradient-2: #C4916C;
             --gradient-3: #1A2636;
         }
 
@@ -40,9 +55,9 @@
             width: 200%;
             height: 200%;
             z-index: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(58, 41, 66, 0.06) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(26, 38, 54, 0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 50% 80%, rgba(122, 78, 50, 0.04) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(58, 41, 66, 0.04) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(26, 38, 54, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 80%, rgba(196, 145, 108, 0.02) 0%, transparent 50%);
             animation: bgMove 20s ease-in-out infinite;
         }
 
@@ -67,22 +82,14 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1.25rem 2rem;
+            padding: 1.25rem 6rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            background: rgba(12, 12, 12, 0.85);
+            background: rgba(12, 12, 12, 0.88);
             border-bottom: 1px solid var(--border);
-        }
-
-        nav .logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--text);
-            letter-spacing: -0.02em;
         }
 
         nav .nav-links {
@@ -97,10 +104,26 @@
             text-decoration: none;
             transition: color 0.3s;
             font-weight: 500;
+            position: relative;
+        }
+
+        nav .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         nav .nav-links a:hover {
             color: var(--text);
+        }
+
+        nav .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* HERO */
@@ -125,10 +148,11 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 7vw, 4.5rem);
             font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
+            line-height: 1;
+            letter-spacing: -0.05em;
             margin-bottom: 1.5rem;
             opacity: 0;
             animation: fadeUp 0.6s ease forwards;
@@ -136,12 +160,29 @@
         }
 
         .hero h1 .gradient-text {
-            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-3), var(--gradient-2));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 5s ease infinite;
+            color: var(--text);
+        }
+
+        .hero h1 .gradient-line {
+            display: block;
+            height: 3px;
+            width: 0;
+            margin-top: 0.75rem;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2), var(--gradient-3), var(--gradient-2), var(--gradient-1));
+            background-size: 300% 100%;
+            animation: shimmer 8s ease-in-out infinite, lineGrow 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        @keyframes lineGrow {
+            to { width: 120px; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes gradientShift {
@@ -160,9 +201,6 @@
 
         .hero-bullets {
             margin-top: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
-            animation-delay: 0.6s;
         }
 
         .hero-bullet {
@@ -171,7 +209,14 @@
             line-height: 2;
             padding-left: 1.25rem;
             position: relative;
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards;
         }
+
+        .hero-bullet:nth-child(1) { animation-delay: 0.6s; }
+        .hero-bullet:nth-child(2) { animation-delay: 0.75s; }
+        .hero-bullet:nth-child(3) { animation-delay: 0.9s; }
+        .hero-bullet:nth-child(4) { animation-delay: 1.05s; }
 
         .hero-bullet::before {
             content: '';
@@ -197,8 +242,8 @@
 
         .section-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 700;
+            font-size: 0.85rem;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--accent);
@@ -209,7 +254,7 @@
         .project-card {
             position: relative;
             padding: 1.5rem;
-            background: var(--surface);
+            background: var(--surface-container);
             border: 1px solid var(--border);
             border-radius: 12px;
             margin-bottom: 1rem;
@@ -234,9 +279,9 @@
         }
 
         .project-card:hover {
-            border-color: #2a2a2a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 60px var(--accent-glow);
+            border-color: var(--border-strong);
+            transform: translateY(-4px) rotateX(1deg);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
         }
 
         .project-card:hover::before {
@@ -251,10 +296,10 @@
         }
 
         .project-card .project-name {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #f0f0f0;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
         }
 
         .project-card .project-arrow {
@@ -270,7 +315,7 @@
 
         .project-card .project-desc {
             font-size: 0.95rem;
-            color: var(--muted);
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 1.25rem;
         }
@@ -294,9 +339,9 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
             padding: 0.3rem 0.6rem;
-            background: rgba(122, 78, 50, 0.12);
+            background: var(--accent-container);
             border-radius: 4px;
-            color: #888;
+            color: var(--muted);
         }
 
         /* STATS */
@@ -304,7 +349,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1px;
-            background: var(--border);
+            background: var(--border-strong);
             border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
@@ -312,7 +357,7 @@
         }
 
         .stat {
-            background: var(--surface);
+            background: var(--surface-container-low);
             padding: 2rem;
             text-align: center;
         }
@@ -339,7 +384,7 @@
         .connect-link {
             flex: 1;
             padding: 1.25rem;
-            background: var(--surface);
+            background: var(--surface-container-low);
             border: 1px solid var(--border);
             border-radius: 10px;
             text-decoration: none;
@@ -347,11 +392,30 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .connect-link:hover {
             border-color: var(--accent);
             box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Sweep glow on connect links */
+        .connect-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(196, 145, 108, 0.06), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .connect-link:hover::before {
+            left: 100%;
         }
 
         .connect-link .connect-label {
@@ -381,13 +445,15 @@
         footer .footer-left {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
-            color: #333;
+            color: var(--muted);
+            opacity: 0.4;
         }
 
         footer .footer-right {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
-            color: #333;
+            color: var(--muted);
+            opacity: 0.4;
         }
 
         /* SCROLL ANIMATIONS */
@@ -418,7 +484,6 @@
     <div class="bg-gradient"></div>
 
     <nav>
-        <div class="logo">chris bonanni</div>
         <ul class="nav-links">
             <li><a href="#projects">projects</a></li>
             <li><a href="#connect">connect</a></li>
@@ -430,7 +495,7 @@
 
         <section class="hero">
             <div class="path">music degree <span>&rarr;</span> sdr <span>&rarr;</span> marketing <span>&rarr;</span> building with ai</div>
-            <h1><span class="gradient-text">Chris Bonanni</span></h1>
+            <h1><span class="gradient-text">Chris Bonanni</span><span class="gradient-line"></span></h1>
             <div class="subtitle">Building tools that help GTM teams move faster.</div>
             <div class="hero-bullets">
                 <div class="hero-bullet"><a href="https://www.credly.com/badges/eeb9cb71-0421-4d7c-89e2-0724eb6dbbf3/linked_in_profile" target="_blank" style="color: var(--text); text-decoration: none; border-bottom: 1px solid var(--accent);">Clay Certified</a></div>
@@ -452,6 +517,7 @@
                     Python/Flask web app that automates event lead processing for a B2B SaaS company. Replaced a multi-day manual spreadsheet workflow.
                 </div>
                 <div class="project-impact">Multi-day process → under an hour. Anyone on the team can run it.</div>
+                <img src="lead-app-screenshot.png" alt="Lead Processing Dashboard" style="width: 100%; border-radius: 8px; margin: 1rem 0; border: 1px solid rgba(255, 255, 255, 0.06);">
                 <div class="project-details">
                     <span class="detail-tag">python</span>
                     <span class="detail-tag">flask</span>
@@ -472,9 +538,10 @@
                     <div class="project-arrow">&nearr;</div>
                 </div>
                 <div class="project-desc">
-                    Full outbound workflow in Clay — enrichment waterfalls, web scraping, ICP scoring, and AI-powered email personalization.
+                    Full outbound workflow in Clay. Enrichment waterfalls, web scraping, ICP scoring, and AI-powered email personalization.
                 </div>
                 <div class="project-impact">End-to-end outbound system. List build → enrich → score → personalize → send.</div>
+                <img src="clay-screenshot.png" alt="Clay Outbound Automation Table" style="width: 100%; border-radius: 8px; margin: 1rem 0; border: 1px solid rgba(255, 255, 255, 0.06);">
                 <div class="project-details">
                     <span class="detail-tag">clay</span>
                     <span class="detail-tag">claygent</span>
