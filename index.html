@@ -280,8 +280,8 @@
 
         .project-card:hover {
             border-color: var(--border-strong);
-            transform: translateY(-4px) rotateX(1deg);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-glow);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5), 0 0 50px var(--accent-glow);
         }
 
         .project-card:hover::before {
@@ -383,15 +383,15 @@
 
         .connect-link {
             flex: 1;
-            padding: 1.25rem;
+            padding: 0.9rem 1.1rem;
             background: var(--surface-container-low);
             border: 1px solid var(--border);
             border-radius: 10px;
             text-decoration: none;
             transition: all 0.3s;
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
         }
@@ -400,6 +400,19 @@
             border-color: var(--accent);
             box-shadow: 0 0 30px var(--accent-glow);
             transform: translateY(-2px);
+        }
+
+        .connect-arrow {
+            color: var(--muted);
+            transition: all 0.3s;
+            display: inline-block;
+            font-size: 0.85em;
+            margin-left: 0.25rem;
+        }
+
+        .connect-link:hover .connect-arrow {
+            color: var(--accent);
+            transform: translate(2px, -2px);
         }
 
         /* Sweep glow on connect links */
@@ -456,6 +469,43 @@
             opacity: 0.4;
         }
 
+        /* BIO */
+        .bio {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 580px;
+        }
+
+        /* TOOLS */
+        .tools-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-item {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.5rem 0.9rem;
+            background: var(--surface-container);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .tool-item:hover {
+            border-color: var(--border-strong);
+            color: var(--text);
+        }
+
+        .tool-item.primary {
+            border-color: var(--accent);
+            color: var(--text);
+            background: var(--accent-container);
+        }
+
         /* SCROLL ANIMATIONS */
         .reveal {
             opacity: 0;
@@ -473,6 +523,7 @@
             .container { padding: 0 1.25rem; }
             nav { padding: 1rem 1.25rem; }
             nav .nav-links { gap: 1rem; }
+            .hero { padding-top: 5rem; }
             .stats-grid { grid-template-columns: 1fr; }
             .connect-grid { flex-direction: column; }
             .hero h1 { font-size: 2rem; }
@@ -485,6 +536,7 @@
 
     <nav>
         <ul class="nav-links">
+            <li><a href="#about">about</a></li>
             <li><a href="#projects">projects</a></li>
             <li><a href="#connect">connect</a></li>
             <li><a href="https://github.com/unboundjoy" target="_blank">github</a></li>
@@ -494,7 +546,7 @@
     <div class="container">
 
         <section class="hero">
-            <div class="path">music degree <span>&rarr;</span> sdr <span>&rarr;</span> marketing <span>&rarr;</span> building with ai</div>
+            <div class="path">music teacher <span>&rarr;</span> sdr <span>&rarr;</span> marketing <span>&rarr;</span> building with ai</div>
             <h1><span class="gradient-text">Chris Bonanni</span><span class="gradient-line"></span></h1>
             <div class="subtitle">Building tools that help GTM teams move faster.</div>
             <div class="hero-bullets">
@@ -502,6 +554,29 @@
                 <div class="hero-bullet">Building with Claude Code</div>
                 <div class="hero-bullet">Songwriter</div>
                 <div class="hero-bullet">Philadelphia</div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="section-label reveal">// about</div>
+            <div class="bio reveal">
+                Started as an SDR and moved into marketing. Having worked both sides, I wanted to be the link between the two. Once I saw what I could build with AI, I started building tools to help revenue teams move faster.
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-label reveal">// tools</div>
+            <div class="tools-grid reveal">
+                <span class="tool-item primary">Clay</span>
+                <span class="tool-item primary">Claude Code</span>
+                <span class="tool-item primary">Python</span>
+                <span class="tool-item">HubSpot</span>
+                <span class="tool-item">Salesforce</span>
+                <span class="tool-item">Flask</span>
+                <span class="tool-item">APIs</span>
+                <span class="tool-item">Pandas</span>
+                <span class="tool-item">Git</span>
+                <span class="tool-item">Prompt Engineering</span>
             </div>
         </section>
 
@@ -516,7 +591,7 @@
                 <div class="project-desc">
                     Python/Flask web app that automates event lead processing for a B2B SaaS company. Replaced a multi-day manual spreadsheet workflow.
                 </div>
-                <div class="project-impact">Multi-day process → under an hour. Anyone on the team can run it.</div>
+                <div class="project-impact">Full-day manual process → under an hour. Filters competitors, separates personal emails, formats for CRM. Anyone on the team can run it.</div>
                 <img src="lead-app-screenshot.png" alt="Lead Processing Dashboard" style="width: 100%; border-radius: 8px; margin: 1rem 0; border: 1px solid rgba(255, 255, 255, 0.06);">
                 <div class="project-details">
                     <span class="detail-tag">python</span>
@@ -557,16 +632,13 @@
             <div class="section-label reveal">// connect</div>
             <div class="connect-grid reveal">
                 <a href="mailto:thechrisbonanni@gmail.com" class="connect-link">
-                    <span class="connect-label">email</span>
-                    <span class="connect-value">thechrisbonanni@gmail.com</span>
+                    <span class="connect-value">Email <span class="connect-arrow">&nearr;</span></span>
                 </a>
                 <a href="https://linkedin.com/in/chris-bonanni/" target="_blank" class="connect-link">
-                    <span class="connect-label">linkedin</span>
-                    <span class="connect-value">chris-bonanni</span>
+                    <span class="connect-value">LinkedIn <span class="connect-arrow">&nearr;</span></span>
                 </a>
                 <a href="https://github.com/unboundjoy" target="_blank" class="connect-link">
-                    <span class="connect-label">github</span>
-                    <span class="connect-value">unboundjoy</span>
+                    <span class="connect-value">GitHub <span class="connect-arrow">&nearr;</span></span>
                 </a>
             </div>
         </section>
