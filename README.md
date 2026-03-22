@@ -6,9 +6,9 @@ Personal portfolio site showcasing GTM engineering projects. Built with vanilla 
 
 ## Projects
 
-1. **Lead Processing Web App** — Python/Flask app that automates event lead processing. Filters competitors, separates personal emails, and formats for CRM upload.
+1. **Radar: Lead Scoring Engine** — Lead scoring with time-decay and trigger-based routing. Fires Slack alerts for SDRs on job changes, closed-lost re-engagement, and former customer contacts. [Live demo](https://radar-gtm.vercel.app)
 2. **Clay Outbound Automation** — End-to-end outbound workflow in Clay. Enrichment waterfalls, web scraping, ICP scoring, and AI-powered email personalization.
-3. **Lead Scoring & Routing Engine** — Scores CRM contacts 0-100 based on engagement signals and routes hot leads to SDRs via Slack. Tracks job changes, closed-lost revisits, and former customer contacts.
+3. **Lead Processing Web App** — Python/Flask app that automates event lead processing. Filters competitors, separates personal emails, and formats for CRM upload.
 
 ## Tech
 
