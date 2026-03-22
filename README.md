@@ -1,22 +1,20 @@
-# Portfolio Site - Chris B.
+# Chris Bonanni — GTM Engineer Portfolio
 
-Personal portfolio website for a GTM Automation Engineer, showcasing projects in sales automation, lead processing, and AI-powered workflow tooling.
+Personal portfolio site showcasing GTM engineering projects. Built with vanilla HTML/CSS/JS and Claude Code.
 
-## Tech Stack
+**Live:** [unboundjoy.github.io](https://unboundjoy.github.io)
 
-- HTML / CSS / JavaScript (no frameworks)
-- Google Fonts (Inter)
-- Responsive design with mobile-first approach
+## Projects
 
-## Running Locally
+1. **Lead Processing Web App** — Python/Flask app that automates event lead processing. Filters competitors, separates personal emails, and formats for CRM upload.
+2. **Clay Outbound Automation** — End-to-end outbound workflow in Clay. Enrichment waterfalls, web scraping, ICP scoring, and AI-powered email personalization.
+3. **Lead Scoring & Routing Engine** — Scores CRM contacts 0-100 based on engagement signals and routes hot leads to SDRs via Slack. Tracks job changes, closed-lost revisits, and former customer contacts.
 
-Open `index.html` in any browser. No build step or server required.
+## Tech
 
-## Projects Featured
+- HTML / CSS / JS (no frameworks)
+- Space Grotesk + JetBrains Mono
+- M3 Material Design color system
+- GitHub Pages
 
-1. **Lead Processing Automation** - Python/Flask web app that automates event lead processing for CRM upload
-2. **Clay Outbound Automation** - Full outbound workflow with enrichment waterfalls, AI personalization, and ICP scoring
-
-## Built With
-
-Claude Code
+Built with Claude Code.
