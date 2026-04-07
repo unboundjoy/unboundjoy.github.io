@@ -3,698 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chris Bonanni | GTM Engineer</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230C0C0C'/><text x='16' y='22' font-family='system-ui,sans-serif' font-size='16' font-weight='700' fill='%23C4916C' text-anchor='middle'>CB</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Chris Bonanni — GTM Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            /* M3 Dark Theme - Surface Tonal Hierarchy */
-            --bg: #0C0C0C;                          /* Surface Dim */
-            --surface: #141414;                      /* Surface */
-            --surface-container-low: #1A1A1A;        /* Surface Container Low */
-            --surface-container: #1E1E1E;            /* Surface Container */
-            --surface-container-high: #252525;       /* Surface Container High */
-            --surface-bright: #2C2C2C;               /* Surface Bright */
-
-            /* M3 Text Hierarchy - On Surface */
-            --text: #E6E1E5;                         /* On Surface (high emphasis) */
-            --text-secondary: #CAC4D0;               /* On Surface Variant */
-            --muted: #938F99;                        /* On Surface - low emphasis */
-
-            /* M3 Outline */
-            --border: rgba(255, 255, 255, 0.08);     /* Outline Variant */
-            --border-strong: rgba(255, 255, 255, 0.14); /* Outline */
-
-            /* 10% Accent - Primary */
-            --accent: #C4916C;                       /* Primary (warmer, lifted for dark bg) */
-            --accent-glow: rgba(196, 145, 108, 0.12);
-            --accent-container: rgba(196, 145, 108, 0.08); /* Primary Container */
-
-            /* Gradients */
-            --gradient-1: #3A2942;
-            --gradient-2: #C4916C;
-            --gradient-3: #1A2636;
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface-2: #1a1a25;
+            --border: rgba(255,255,255,0.08);
+            --text: #e4e4e7;
+            --muted: #71717a;
+            --accent: #06b6d4;
+            --accent-glow: rgba(6,182,212,0.15);
+            --green: #10b981;
+            --amber: #f59e0b;
         }
-
         body {
             font-family: 'Space Grotesk', sans-serif;
             background: var(--bg);
             color: var(--text);
-            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
         }
+        .container { max-width: 720px; margin: 0 auto; padding: 4rem 2rem; }
 
-        /* Animated gradient background */
-        .bg-gradient {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            z-index: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(58, 41, 66, 0.04) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(26, 38, 54, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 50% 80%, rgba(196, 145, 108, 0.02) 0%, transparent 50%);
-            animation: bgMove 20s ease-in-out infinite;
+        .hero { margin-bottom: 3rem; }
+        .hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .hero .subtitle { color: var(--accent); font-size: 1.1rem; font-weight: 500; margin-bottom: 0.75rem; }
+        .hero .journey { color: var(--muted); font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; }
+        .hero p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+
+        .links { display: flex; gap: 1.25rem; margin-top: 1.25rem; }
+        .links a {
+            color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 500;
+            padding: 0.4rem 0.8rem; border: 1px solid rgba(6,182,212,0.3); border-radius: 6px;
+            transition: all 0.2s;
         }
-
-        @keyframes bgMove {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(-2%, -1%); }
-            66% { transform: translate(1%, 2%); }
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            margin: 0;
-            padding: 0 2rem 0 6rem;
-        }
-
-        /* NAV */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: 1.25rem 6rem;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(12, 12, 12, 0.88);
-            border-bottom: 1px solid var(--border);
-        }
-
-        nav .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        nav .nav-links a {
-            font-size: 0.85rem;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-            position: relative;
-        }
-
-        nav .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        nav .nav-links a:hover {
-            color: var(--text);
-        }
-
-        nav .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* HERO */
-        .hero {
-            padding-top: 7rem;
-            padding-bottom: 2rem;
-        }
-
-        .hero .path {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.05em;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
-            animation-delay: 0.2s;
-        }
-
-        .hero .path span {
-            color: var(--accent);
-        }
-
-        .hero h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(3rem, 7vw, 4.5rem);
-            font-weight: 700;
-            line-height: 1;
-            letter-spacing: -0.05em;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
-            animation-delay: 0.4s;
-        }
-
-        .hero h1 .gradient-text {
-            color: var(--text);
-        }
-
-        .hero h1 .gradient-line {
-            display: block;
-            height: 3px;
-            width: 0;
-            margin-top: 0.75rem;
-            border-radius: 2px;
-            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2), var(--gradient-3), var(--gradient-2), var(--gradient-1));
-            background-size: 300% 100%;
-            animation: shimmer 8s ease-in-out infinite, lineGrow 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
-            box-shadow: 0 0 12px var(--accent-glow);
-        }
-
-        @keyframes lineGrow {
-            to { width: 120px; }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .subtitle {
-            font-size: 1.05rem;
-            color: var(--muted);
-            margin-top: 0.75rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
-            animation-delay: 0.5s;
-        }
-
-        .hero-bullets {
-            margin-top: 1.5rem;
-        }
-
-        .hero-bullet {
-            font-size: 1rem;
-            color: var(--muted);
-            line-height: 2;
-            padding-left: 1.25rem;
-            position: relative;
-            opacity: 0;
-            animation: fadeUp 0.5s ease forwards;
-        }
-
-        .hero-bullet:nth-child(1) { animation-delay: 0.6s; }
-        .hero-bullet:nth-child(2) { animation-delay: 0.75s; }
-        .hero-bullet:nth-child(3) { animation-delay: 0.9s; }
-        .hero-bullet:nth-child(4) { animation-delay: 1.05s; }
-
-        .hero-bullet::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent);
-            transform: translateY(-50%);
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* SECTIONS */
-        .section {
-            padding: 2rem 0;
-        }
+        .links a:hover { background: var(--accent-glow); border-color: var(--accent); }
 
         .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent);
-            margin-bottom: 1.25rem;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--accent); font-weight: 600; margin-bottom: 1rem;
         }
 
-        /* PROJECT CARDS */
-        .project-card {
-            position: relative;
-            padding: 1.5rem;
-            background: var(--surface-container);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-            overflow: hidden;
+        .project {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.5rem; margin-bottom: 1.25rem; transition: border-color 0.2s;
         }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
+        .project:hover { border-color: rgba(6,182,212,0.3); }
+        .project h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .project h3 a { color: var(--text); text-decoration: none; }
+        .project h3 a:hover { color: var(--accent); }
+        .project .tag {
+            display: inline-block; font-size: 0.65rem; padding: 0.15rem 0.5rem;
+            background: var(--accent-glow); color: var(--accent); border-radius: 4px;
+            font-weight: 500; margin-left: 0.5rem; vertical-align: middle;
         }
-
-        .project-card:hover {
-            border-color: var(--border-strong);
-            transform: translateY(-4px);
-            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5), 0 0 50px var(--accent-glow);
+        .project p { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.75rem; }
+        .project ul { list-style: none; padding: 0; }
+        .project ul li {
+            font-size: 0.8rem; color: var(--text); padding: 0.2rem 0;
+            padding-left: 1rem; position: relative;
         }
-
-        .project-card:hover::before {
-            opacity: 1;
+        .project ul li::before {
+            content: ''; position: absolute; left: 0; top: 0.55rem;
+            width: 4px; height: 4px; background: var(--accent); border-radius: 50%;
         }
-
-        .project-card .project-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.75rem;
+        .project .tech {
+            margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem;
         }
-
-        .project-card .project-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .project-card .project-arrow {
-            font-size: 1.2rem;
-            color: var(--muted);
-            transition: all 0.3s;
-        }
-
-        .project-card:hover .project-arrow {
-            color: var(--accent);
-            transform: translate(3px, -3px);
-        }
-
-        .project-card .project-desc {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1.25rem;
-        }
-
-        .project-card .project-impact {
-            font-size: 0.85rem;
-            color: var(--text);
-            font-weight: 500;
-            margin-bottom: 1rem;
-            padding-left: 0.75rem;
-            border-left: 2px solid var(--accent);
-        }
-
-        .project-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
-
-        .project-details .detail-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            padding: 0.3rem 0.6rem;
-            background: var(--accent-container);
+        .project .tech span {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+            padding: 0.15rem 0.5rem; background: var(--surface-2); color: var(--muted);
             border-radius: 4px;
-            color: var(--muted);
         }
 
-        /* STATS */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border-strong);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 4rem;
+        .skills { margin-top: 3rem; }
+        .skill-group { margin-bottom: 1rem; }
+        .skill-group label { font-size: 0.75rem; color: var(--muted); font-weight: 500; display: block; margin-bottom: 0.35rem; }
+        .skill-group .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .skill-group .tags span {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+            padding: 0.2rem 0.6rem; background: var(--surface); border: 1px solid var(--border);
+            color: var(--text); border-radius: 4px;
         }
 
-        .stat {
-            background: var(--surface-container-low);
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        /* CONNECT */
-        .connect-grid {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .connect-link {
-            flex: 1;
-            padding: 0.9rem 1.1rem;
-            background: var(--surface-container-low);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .connect-link:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateY(-2px);
-        }
-
-        .connect-arrow {
-            color: var(--muted);
-            transition: all 0.3s;
-            display: inline-block;
-            font-size: 0.85em;
-            margin-left: 0.25rem;
-        }
-
-        .connect-link:hover .connect-arrow {
-            color: var(--accent);
-            transform: translate(2px, -2px);
-        }
-
-        /* Sweep glow on connect links */
-        .connect-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(196, 145, 108, 0.06), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .connect-link:hover::before {
-            left: 100%;
-        }
-
-        .connect-link .connect-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .connect-link .connect-value {
-            font-size: 0.9rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        /* FOOTER */
-        footer {
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            margin-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        footer .footer-left {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--muted);
-            opacity: 0.4;
-        }
-
-        footer .footer-right {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--muted);
-            opacity: 0.4;
-        }
-
-        /* BIO */
-        .bio {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            max-width: 580px;
-        }
-
-        /* TOOLS */
-        .tools-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tool-item {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            padding: 0.5rem 0.9rem;
-            background: var(--surface-container);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-        }
-
-        .tool-item:hover {
-            border-color: var(--border-strong);
-            color: var(--text);
-        }
-
-        .tool-item.primary {
-            border-color: var(--accent);
-            color: var(--text);
-            background: var(--accent-container);
-        }
-
-        /* SCROLL ANIMATIONS */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
-            .container { padding: 0 1.25rem; }
-            nav { padding: 1rem 1.25rem; }
-            nav .nav-links { gap: 1rem; }
-            .hero { padding-top: 5rem; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .connect-grid { flex-direction: column; }
-            .hero h1 { font-size: 2rem; }
-        }
+        footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
     </style>
 </head>
 <body>
-
-    <div class="bg-gradient"></div>
-
-    <nav>
-        <ul class="nav-links">
-            <li><a href="#about">about</a></li>
-            <li><a href="#projects">projects</a></li>
-            <li><a href="#connect">connect</a></li>
-            <li><a href="https://github.com/unboundjoy" target="_blank">github</a></li>
-        </ul>
-    </nav>
-
     <div class="container">
-
-        <section class="hero">
-            <div class="path">music teacher <span>&rarr;</span> sdr <span>&rarr;</span> marketing <span>&rarr;</span> building with ai</div>
-            <h1><span class="gradient-text">Chris Bonanni</span><span class="gradient-line"></span></h1>
-            <div class="subtitle">Building tools that help GTM teams move faster.</div>
-            <div class="hero-bullets">
-                <div class="hero-bullet"><a href="https://www.credly.com/badges/eeb9cb71-0421-4d7c-89e2-0724eb6dbbf3/linked_in_profile" target="_blank" style="color: var(--text); text-decoration: none; border-bottom: 1px solid var(--accent);">Clay Certified</a></div>
-                <div class="hero-bullet">Building with Claude Code</div>
-                <div class="hero-bullet">Songwriter</div>
-                <div class="hero-bullet">Philadelphia</div>
+        <div class="hero">
+            <h1>Chris Bonanni</h1>
+            <div class="subtitle">GTM Engineer</div>
+            <div class="journey">music teacher &rarr; SDR &rarr; marketing &rarr; building with AI</div>
+            <p>I build tools that help revenue teams find signal in their CRM data. Currently focused on CRM intelligence, lead scoring, and outbound automation.</p>
+            <div class="links">
+                <a href="https://linkedin.com/in/chris-bonanni/">LinkedIn</a>
+                <a href="https://github.com/unboundjoy">GitHub</a>
+                <a href="mailto:thechrisbonanni@gmail.com">Email</a>
             </div>
-        </section>
+        </div>
 
-        <section class="section" id="about">
-            <div class="section-label reveal">// about</div>
-            <div class="bio reveal">
-                Started as an SDR and moved into marketing. Having worked both sides, I wanted to be the link between the two. Once I saw what I could build with AI, I started building tools to help revenue teams move faster.
+        <div class="section-label">Projects</div>
+
+        <div class="project">
+            <h3><a href="https://radar-gtm.vercel.app">Radar GTM</a> <span class="tag">LIVE</span></h3>
+            <p>CRM intelligence platform that connects to HubSpot & Salesforce, scores contacts, detects job changes, and routes hot leads to Slack.</p>
+            <ul>
+                <li>OAuth integration with HubSpot & Salesforce — one-click CRM connect</li>
+                <li>Auto buyer persona detection from closed-won deal contacts</li>
+                <li>Lead scoring with time-decay, AI sentiment analysis, and signal stacking bonuses</li>
+                <li>Pipeline quantification using CRM win rate and avg deal size</li>
+                <li>Job change detection via CRM duplicate analysis</li>
+                <li>Smart contact import with plan-based limits and priority scoring</li>
+                <li>Real-time Slack alerts for champions, job changes, and hot leads</li>
+            </ul>
+            <div class="tech">
+                <span>Python</span><span>Flask</span><span>PostgreSQL</span><span>Claude API</span>
+                <span>HubSpot API</span><span>Salesforce API</span><span>OAuth 2.0</span>
+                <span>Slack</span><span>Stripe</span><span>Vercel</span>
             </div>
-        </section>
+        </div>
 
-        <section class="section">
-            <div class="section-label reveal">// tools</div>
-            <div class="tools-grid reveal">
-                <span class="tool-item primary">Clay</span>
-                <span class="tool-item primary">HubSpot</span>
-                <span class="tool-item primary">Salesforce</span>
-                <span class="tool-item primary">Python</span>
-                <span class="tool-item">Claude Code</span>
-                <span class="tool-item">Prompt Engineering</span>
-                <span class="tool-item">SQL</span>
-                <span class="tool-item">APIs</span>
-                <span class="tool-item">n8n</span>
-                <span class="tool-item">Zapier</span>
-                <span class="tool-item">Apollo</span>
-                <span class="tool-item">Outreach</span>
-                <span class="tool-item">Gong</span>
-                <span class="tool-item">LinkedIn Sales Navigator</span>
-                <span class="tool-item">ZoomInfo</span>
+        <div class="project">
+            <h3><a href="https://github.com/unboundjoy/clay-outbound-automation">Clay Outbound Automation</a></h3>
+            <p>Full outbound workflow with enrichment waterfalls, ICP scoring, and AI-powered email personalization.</p>
+            <ul>
+                <li>Multi-source data enrichment with validation logic</li>
+                <li>Claygent web scraping for prospect research</li>
+                <li>AI-generated personalized email copy</li>
+                <li>Built for Clay Outbound Automation Certification</li>
+            </ul>
+            <div class="tech">
+                <span>Clay</span><span>Claude Code</span><span>Enrichment APIs</span>
             </div>
-        </section>
+        </div>
 
-        <section class="section" id="projects">
-            <div class="section-label reveal">// projects</div>
-
-<a href="https://radar-gtm.vercel.app" target="_blank" class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-name">Radar: Lead Scoring Engine</div>
-                    <span class="project-arrow">&nearr;</span>
-                </div>
-                <p class="project-desc">Lead scoring engine with time-decay, trigger-based routing, and AI-powered sentiment detection. Analyzes email replies with Claude API to classify intent and suggest follow-up actions. Routes hot leads and GTM plays to SDRs via Slack.</p>
-                <p class="project-impact">Automated lead prioritization and real-time Slack routing.</p>
-                <img src="lead-scorer-screenshot.png" alt="Lead Scoring Dashboard" style="width: 100%; border-radius: 8px; margin: 1rem 0; border: 1px solid rgba(255, 255, 255, 0.06);">
-
-                <div class="project-details">
-                    <span class="detail-tag">python</span>
-                    <span class="detail-tag">flask</span>
-                    <span class="detail-tag">sql</span>
-                    <span class="detail-tag">claude api</span>
-                    <span class="detail-tag">slack webhooks</span>
-                    <span class="detail-tag">rest api</span>
-                    <span class="detail-tag">claude code</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/unboundjoy/clay-outbound-automation" target="_blank" class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-name" style="display: flex; align-items: center; gap: 0.6rem;">
-                        <img src="clay-logo.png" alt="Clay" style="height: 24px; border-radius: 4px;">
-                        Clay Outbound Automation
-                    </div>
-                    <div class="project-arrow">&nearr;</div>
-                </div>
-                <div class="project-desc">
-                    Full outbound workflow in Clay. Enrichment waterfalls, web scraping, ICP scoring, and AI-powered email personalization.
-                </div>
-                <div class="project-impact">End-to-end outbound system. List build → enrich → score → personalize → send.</div>
-                <img src="clay-screenshot.png" alt="Clay Outbound Automation Table" style="width: 100%; border-radius: 8px; margin: 1rem 0; border: 1px solid rgba(255, 255, 255, 0.06);">
-                <div class="project-details">
-                    <span class="detail-tag">clay</span>
-                    <span class="detail-tag">claygent</span>
-                    <span class="detail-tag">enrichment waterfalls</span>
-                    <span class="detail-tag">icp scoring</span>
-                    <span class="detail-tag">ai personalization</span>
-                    <span class="detail-tag">claude code</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/unboundjoy/lead-processing-app" target="_blank" class="project-card reveal">
-                <div class="project-top">
-                    <div class="project-name">Lead Processing Web App</div>
-                    <div class="project-arrow">&nearr;</div>
-                </div>
-                <div class="project-desc">
-                    Python/Flask web app that automates event lead processing for a B2B SaaS company. Replaced a multi-day manual spreadsheet workflow.
-                </div>
-                <div class="project-impact">Full-day manual process → under an hour. Filters competitors, separates personal emails, formats for CRM. Anyone on the team can run it.</div>
-                <img src="lead-app-screenshot.png" alt="Lead Processing Dashboard" style="width: 100%; border-radius: 8px; margin: 1rem 0; border: 1px solid rgba(255, 255, 255, 0.06);">
-                <div class="project-details">
-                    <span class="detail-tag">python</span>
-                    <span class="detail-tag">flask</span>
-                    <span class="detail-tag">pandas</span>
-                    <span class="detail-tag">claude code</span>
-                    <span class="detail-tag">domain filtering</span>
-                    <span class="detail-tag">smart column detection</span>
-                    <span class="detail-tag">crm formatting</span>
-                </div>
-            </a>
-        </section>
-
-        <section class="section" id="connect">
-            <div class="section-label reveal">// connect</div>
-            <div class="connect-grid reveal">
-                <a href="mailto:thechrisbonanni@gmail.com" class="connect-link">
-                    <span class="connect-value">Email <span class="connect-arrow">&nearr;</span></span>
-                </a>
-                <a href="https://linkedin.com/in/chris-bonanni/" target="_blank" class="connect-link">
-                    <span class="connect-value">LinkedIn <span class="connect-arrow">&nearr;</span></span>
-                </a>
-                <a href="https://github.com/unboundjoy" target="_blank" class="connect-link">
-                    <span class="connect-value">GitHub <span class="connect-arrow">&nearr;</span></span>
-                </a>
+        <div class="project">
+            <h3><a href="https://github.com/unboundjoy/lead-processing-app">Lead Processing Web App</a></h3>
+            <p>Python/Flask tool that automates event lead cleanup, enrichment, and CRM formatting for Salesforce import.</p>
+            <ul>
+                <li>Filters personal emails and invalid data from 3rd-party lead lists</li>
+                <li>Formats and enriches contacts for CRM upload</li>
+                <li>Replaced manual spreadsheet workflow</li>
+            </ul>
+            <div class="tech">
+                <span>Python</span><span>Flask</span><span>Salesforce</span>
             </div>
-        </section>
+        </div>
+
+        <div class="skills">
+            <div class="section-label">Skills</div>
+            <div class="skill-group">
+                <label>GTM & Automation</label>
+                <div class="tags">
+                    <span>Clay</span><span>Apollo</span><span>Outreach</span><span>Gong</span>
+                    <span>LinkedIn Sales Navigator</span><span>ZoomInfo</span><span>Zapier</span><span>n8n</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <label>CRM</label>
+                <div class="tags">
+                    <span>Salesforce</span><span>HubSpot</span><span>OAuth</span><span>SOQL</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <label>Technical</label>
+                <div class="tags">
+                    <span>Python</span><span>SQL</span><span>Flask</span><span>PostgreSQL</span>
+                    <span>REST APIs</span><span>Claude API</span><span>Claude Code</span><span>Cursor</span>
+                    <span>Vercel</span><span>Stripe</span>
+                </div>
+            </div>
+        </div>
 
         <footer>
-            <div class="footer-left">built with claude code</div>
-            <div class="footer-right">2026</div>
+            Built with Claude Code &middot; Philadelphia, PA
         </footer>
-
     </div>
-
-    <script>
-        // Scroll reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-
 </body>
 </html>
